@@ -17,6 +17,7 @@ import m5 from "../../public/m5.png";
 import m6 from "../../public/m6.png";
 import m7 from "../../public/m7.png";
 import m8 from "../../public/m8.png";
+import StatsSection from "@/components/home/StatsSection";
 
 export default function Home() {
   return (
@@ -78,6 +79,8 @@ export default function Home() {
           <Image src={m8} width={140} height={140} alt="company image 8" className="mr-16" />
         </Marquee>
       </div>
+
+      <StatsSection />
     </div>
   );
 }
