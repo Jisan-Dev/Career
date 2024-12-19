@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import bannerImg from "../../public/banner.png";
 import arrow from "../../public/arrow.png";
@@ -9,6 +9,14 @@ import google from "../../public/google.png";
 import unknown from "../../public/unknown.png";
 import behance from "../../public/behance.png";
 import slack from "../../public/slack.png";
+import m1 from "../../public/m1.png";
+import m2 from "../../public/m2.png";
+import m3 from "../../public/m3.png";
+import m4 from "../../public/m4.png";
+import m5 from "../../public/m5.png";
+import m6 from "../../public/m6.png";
+import m7 from "../../public/m7.png";
+import m8 from "../../public/m8.png";
 
 export default function Home() {
   return (
@@ -30,9 +38,9 @@ export default function Home() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" className=""></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65" className=""></line>
               </svg>
@@ -56,6 +64,20 @@ export default function Home() {
       <Image src={unknown} className="absolute top-64 left-36" alt="banner icons image" />
       <Image src={behance} className="absolute top-20 left-14" alt="banner icons image" />
       <Image src={slack} className="absolute top-[450px] left-14" alt="banner icons image" />
+
+      {/* Marquee */}
+      <div className="bg-[#8C8AFF] py-6">
+        <Marquee>
+          <Image src={m1} width={140} height={140} alt="company image 1" className="mr-16" />
+          <Image src={m2} width={140} height={140} alt="company image 2" className="mr-16" />
+          <Image src={m3} width={140} height={140} alt="company image 3" className="mr-16" />
+          <Image src={m4} width={140} height={140} alt="company image 4" className="mr-16" />
+          <Image src={m5} width={140} height={140} alt="company image 5" className="mr-16" />
+          <Image src={m6} width={140} height={140} alt="company image 6" className="mr-16" />
+          <Image src={m7} width={140} height={140} alt="company image 7" className="mr-16" />
+          <Image src={m8} width={140} height={140} alt="company image 8" className="mr-16" />
+        </Marquee>
+      </div>
     </div>
   );
 }
