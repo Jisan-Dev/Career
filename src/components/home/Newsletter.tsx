@@ -13,7 +13,7 @@ const Newsletter = () => {
         <h2 className="w-[770px] text-center text-[52px] font-bold leading-[62px]">Subscribe to get info about the world of job</h2>
         <div className="flex gap-1 items-center justify-center mt-10">
           <Input placeholder="Enter your email address" className="w-[470px]" />
-          <Button className="bg-slate-900">Subscribe</Button>
+          <Button className="bg-slate-950">Subscribe</Button>
         </div>
       </div>
     </div>
