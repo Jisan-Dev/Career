@@ -21,6 +21,7 @@ import StatsSection from "@/components/home/StatsSection";
 import Category from "@/components/home/Category";
 import PostJob from "@/components/home/PostJob";
 import Graduating from "@/components/home/Graduating";
+import LatestFeaturedJobs from "@/components/home/LatestFeaturedJobs";
 
 export default function Home() {
   return (
@@ -87,6 +88,7 @@ export default function Home() {
       <Category />
       <PostJob />
       <Graduating />
+      <LatestFeaturedJobs />
     </div>
   );
 }

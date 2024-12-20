@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const PostJob = () => {
   return (
-    <div className="container mx-auto my-28 flex items-center justify-between">
+    <div className="container mx-auto my-32 flex items-center justify-between">
       <div>
         <h2 className="w-[570px] text-[52px] font-bold leading-[62px]">Find your dream jobs in best companies</h2>
         <p className="w-[470px] text-lg font-normal text-slate-600 leading-[30px] mt-4 mb-8">
