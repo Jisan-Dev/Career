@@ -22,6 +22,7 @@ import Category from "@/components/home/Category";
 import PostJob from "@/components/home/PostJob";
 import Graduating from "@/components/home/Graduating";
 import LatestFeaturedJobs from "@/components/home/LatestFeaturedJobs";
+import Newsletter from "@/components/home/Newsletter";
 
 export default function Home() {
   return (
@@ -89,6 +90,7 @@ export default function Home() {
       <PostJob />
       <Graduating />
       <LatestFeaturedJobs />
+      <Newsletter />
     </div>
   );
 }
