@@ -19,6 +19,7 @@ import m7 from "../../public/m7.png";
 import m8 from "../../public/m8.png";
 import StatsSection from "@/components/home/StatsSection";
 import Category from "@/components/home/Category";
+import PostJob from "@/components/home/PostJob";
 
 export default function Home() {
   return (
@@ -83,6 +84,7 @@ export default function Home() {
 
       <StatsSection />
       <Category />
+      <PostJob />
     </div>
   );
 }

@@ -186,8 +186,8 @@ const Category = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map((category, index) => (
-            <div className="group">
-              <div key={index} className={`p-6 rounded border border-violet-200 transition-all duration-300 hover:bg-violet-200`}>
+            <div key={index} className="group">
+              <div className={`p-6 rounded border border-violet-200 transition-all duration-300 hover:bg-violet-200`}>
                 <div className="text-4xl mb-8">{category.icon}</div>
                 <h3 className="text-2xl  font-bold mb-2">{category.name}</h3>
                 <p className="text-gray-600 font-semibold text-[18px] mb-4">{category.jobs} jobs available &rarr;</p>
