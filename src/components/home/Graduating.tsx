@@ -5,7 +5,7 @@ import s1 from "../../../public/s1.svg";
 const Graduating = () => {
   return (
     <div className="container mx-auto my-32 flex items-center gap-32">
-      <div className="bg-[#8C8AFF] w-[470px] h-[520px] rounded-lg flex items-center justify-center relative">
+      <div className="bg-primary w-[470px] h-[520px] rounded-lg flex items-center justify-center relative">
         <Image src={chele} height={578} alt="image" className="-mt-16" />
         <Image src={s1} height={123} alt="image" className="absolute -top-11 -right-10" />
       </div>
