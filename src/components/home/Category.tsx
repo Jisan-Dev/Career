@@ -1,4 +1,4 @@
-import React from "react";
+import * as motion from "motion/react-client";
 
 const categories = [
   {
@@ -176,17 +176,33 @@ const Category = () => {
     <section className="container mx-auto mb-10">
       <div className="">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-[48px] font-bold">
+          <motion.h2
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ duration: 0.9 }}
+            className="text-[48px] font-bold">
             Explore by <span className="text-primary">category</span>
-          </h2>
-          <a href="#" className="text-primary text-lg font-medium hover:underline">
+          </motion.h2>
+          <motion.p
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ duration: 0.9 }}
+            className="text-primary text-lg font-medium hover:underline">
             Show all jobs &rarr;
-          </a>
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map((category, index) => (
-            <div key={index} className="group">
+            <motion.div
+              key={index}
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.9, delay: index * 0.2 }}
+              className="group">
               <div className={`p-6 rounded border border-violet-200 transition-all duration-300 hover:bg-violet-200`}>
                 <div className="text-4xl mb-8">{category.icon}</div>
                 <h3 className="text-2xl  font-bold mb-2">{category.name}</h3>
@@ -195,7 +211,7 @@ const Category = () => {
                   Explore &rarr;
                 </a> */}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

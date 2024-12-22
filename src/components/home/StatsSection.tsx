@@ -1,17 +1,55 @@
+"use client";
+import { AnimatedNumber } from "@/components/ui/animated-number";
+import { useInView } from "motion/react";
+import { useRef, useState } from "react";
+import { motion } from "motion/react";
+import { MoveRight } from "lucide-react";
+
 const StatsSection = () => {
+  const [recruiterMessages, setRecruiterMessages] = useState<number>(0);
+  const [jobOpportunities, setJobOpportunities] = useState<number>(0);
+  const [offersMade, setOffersMade] = useState<number>(0);
+  const [successRate, setSuccessRate] = useState<number>(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+
+  if (isInView && jobOpportunities === 0 && recruiterMessages === 0 && offersMade === 0 && successRate === 0) {
+    setRecruiterMessages(500);
+    setJobOpportunities(40);
+    setOffersMade(17);
+    setSuccessRate(97);
+  }
+
   return (
     <section className="py-36 container mx-auto px-10">
-      <div className="">
+      <div>
         <div className="flex justify-between items-center mb-16">
-          <h2 className="w-[570px] text-[52px] font-bold leading-[62px]">The fast track to your next job</h2>
-          <p className="w-[470px] text-[#574f4a] text-lg font-normal leading-[30px]">
+          <motion.h2
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9 }}
+            className="w-[570px] text-[52px] font-bold leading-[62px]">
+            The fast track to your next job
+          </motion.h2>
+          <motion.p
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9 }}
+            className="w-[470px] text-[#574f4a] text-lg font-normal leading-[30px]">
             We ensure your next step is a step forward. That’s why we built a jobs marketplace that serves all kinds of professionals first.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-7">
           {/* Card 1 */}
-          <div className="bg-[#e6e6ff] p-6 py-8 rounded-lg shadow-md">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9 }}
+            className="bg-[#e6e6ff] p-6 py-8 rounded-lg shadow-md">
             <div className="flex items-center justify-center h-12 w-12 bg-indigo-100 rounded-full mb-4">
               <svg width="50" height="52" viewBox="0 0 50 62" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Group 18573">
@@ -41,11 +79,18 @@ const StatsSection = () => {
             </div>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Create one profile</h3>
             <p className="text-gray-600 mb-4">Build your reputation with a universal profile that works across hundreds of different kinds of employers.</p>
-            <button className="text-indigo-600 font-medium">Get Started &rarr;</button>
-          </div>
+            <button className="group text-indigo-600 font-medium flex items-center gap-2">
+              Get Started <MoveRight className="-ms-1 me-2 mt-[2px] transition-transform group-hover:translate-x-0.5" size={16} strokeWidth={2} aria-hidden="true" />
+            </button>
+          </motion.div>
 
           {/* Card 2 */}
-          <div className="bg-[#e6e6ff] p-6 py-8 rounded-lg shadow-md">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="bg-[#e6e6ff] p-6 py-8 rounded-lg shadow-md">
             <div className="flex items-center justify-center h-12 w-12 bg-indigo-100 rounded-full mb-4">
               <svg width="72" height="62" viewBox="0 0 72 62" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Group 18572">
@@ -95,11 +140,18 @@ const StatsSection = () => {
             </div>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Explore your options</h3>
             <p className="text-gray-600 mb-4">Select your preferences (shift details, salary, location, etc.) and discover jobs most relevant to you.</p>
-            <button className="text-indigo-600 font-medium">Get Started &rarr;</button>
-          </div>
+            <button className="group text-indigo-600 font-medium flex items-center gap-2">
+              Get Started <MoveRight className="-ms-1 me-2 mt-[2px] transition-transform group-hover:translate-x-0.5" size={16} strokeWidth={2} aria-hidden="true" />
+            </button>
+          </motion.div>
 
           {/* Card 3 */}
-          <div className="bg-[#e6e6ff] p-6 py-8 rounded-lg shadow-md">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9, delay: 0.5 }}
+            className="bg-[#e6e6ff] p-6 py-8 rounded-lg shadow-md">
             <div className="flex items-center justify-center h-12 w-12 bg-indigo-100 rounded-full mb-4">
               <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Group 18574">
@@ -141,31 +193,65 @@ const StatsSection = () => {
             </div>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Talk on your terms</h3>
             <p className="text-gray-600 mb-4">Message multiple employers while keeping all communication in one, convenient place. It’s so much easy.</p>
-            <button className="text-indigo-600 font-medium">Get Started &rarr;</button>
-          </div>
+            <button className="group text-indigo-600 font-medium flex items-center gap-2">
+              Get Started <MoveRight className="-ms-1 me-2 mt-[2px] transition-transform group-hover:translate-x-0.5" size={16} strokeWidth={2} aria-hidden="true" />
+            </button>
+          </motion.div>
         </div>
 
         {/* Stats Section */}
-        <div className="flex items-center justify-center bg-[#070828] px-[104px] py-12 rounded-xl mt-8">
+        <div ref={ref} className="flex items-center justify-center bg-[#070828] px-[104px] py-12 rounded-xl mt-6">
           <div className="flex-1 border-r">
-            <h4 className="text-[52px] font-bold text-gray-50">500k+</h4>
+            <AnimatedNumber
+              className="inline-flex items-center text-[52px] font-bold text-gray-50"
+              springOptions={{
+                bounce: 0,
+                duration: 6000,
+              }}
+              value={recruiterMessages}
+              suffix="k+"
+            />
             <p className="text-gray-50">Messages from recruiters</p>
           </div>
           <div className="flex-1 border-r flex flex-col items-center">
             <div>
-              <h4 className="text-[52px] font-bold text-gray-50">40k</h4>
+              <AnimatedNumber
+                className="inline-flex items-center text-[52px] font-bold text-gray-50"
+                springOptions={{
+                  bounce: 0,
+                  duration: 6000,
+                }}
+                value={jobOpportunities}
+                suffix="k"
+              />
               <p className="text-gray-50">Job opportunities</p>
             </div>
           </div>
           <div className="flex-1 border-r flex flex-col items-center">
             <div>
-              <h4 className="text-[52px] font-bold text-gray-50">17k</h4>
+              <AnimatedNumber
+                className="inline-flex items-center text-[52px] font-bold text-gray-50"
+                springOptions={{
+                  bounce: 0,
+                  duration: 6000,
+                }}
+                value={offersMade}
+                suffix="k"
+              />
               <p className="text-gray-50">Offers made</p>
             </div>
           </div>
           <div className="flex-1 flex flex-col items-center">
             <div>
-              <h4 className="text-[52px] font-bold text-gray-50">97%</h4>
+              <AnimatedNumber
+                className="inline-flex items-center text-[52px] font-bold text-gray-50"
+                springOptions={{
+                  bounce: 0,
+                  duration: 6000,
+                }}
+                value={successRate}
+                suffix="%"
+              />
               <p className="text-gray-50">Hire Success Rate</p>
             </div>
           </div>

@@ -57,5 +57,10 @@ export default {
       },
     },
   },
+  variants: {
+    extend: {
+      translate: ["group-hover"], // Ensure translate is enabled for group-hover
+    },
+  },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
