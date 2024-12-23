@@ -13,9 +13,37 @@ const PostJob = () => {
         <TextEffect as="h2" className="w-[570px] text-[52px] font-bold leading-[62px]" per="char" preset="fade">
           Find your dream jobs in best companies
         </TextEffect>
-        <TextEffect as="p" per="word" preset="blur" className="w-[470px] text-lg font-normal text-slate-600 leading-[30px] mt-4 mb-8">
-          We don’t believe that we’ve found the holy grail of tech combinations. Instead, we believe that you should always explore better and new tech. We challenge you to bring
-          new ideas to the board.
+        <TextEffect
+          as="p"
+          per="line"
+          segmentWrapperClassName="overflow-hidden block"
+          variants={{
+            container: {
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.4 },
+              },
+            },
+            item: {
+              hidden: {
+                opacity: 0,
+                y: 40,
+              },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.9,
+                },
+              },
+            },
+          }}
+          className="text-lg font-normal text-slate-600 leading-[30px] mt-4 mb-8">
+          {`We don’t believe that we’ve found the holy grail of tech
+combinations. Instead, we believe that you should
+always explore better and new tech. We challenge you
+to bring new ideas to the board.`}
         </TextEffect>
         <InView
           variants={{
@@ -37,9 +65,27 @@ const PostJob = () => {
           <Button size={"lg"}>Sign Up Now</Button>
         </InView>
       </div>
-      <div>
-        <Image src={postJobImg} width={600} alt="image" />
-      </div>
+      <InView
+        variants={{
+          hidden: {
+            opacity: 0,
+            y: -60,
+            scale: 0.35,
+            filter: "blur(4px)",
+          },
+          visible: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+          },
+        }}
+        transition={{ duration: 2, delay: 0.3, ease: "easeInOut" }}
+        viewOptions={{ margin: "0px 0px -50px 0px", once: true }}>
+        <div>
+          <Image src={postJobImg} width={600} alt="image" />
+        </div>
+      </InView>
     </div>
   );
 };
