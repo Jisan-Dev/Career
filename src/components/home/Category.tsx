@@ -200,8 +200,8 @@ const Category = () => {
               key={index}
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.9, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
               className="group">
               <div className={`p-6 rounded border border-violet-200 transition-all duration-300 hover:bg-violet-200`}>
                 <div className="text-4xl mb-8">{category.icon}</div>

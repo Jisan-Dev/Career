@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo and Description */}
         <div>
-          {/* <h1 className="text-xl font-bold text-lime-400 flex items-center">
+          {/* <h1 className="text-xl font-bold text-indigo-400 flex items-center">
             <span className="mr-2 text-2xl">🛍</span> TokoJobs
           </h1> */}
           <Image src={LogoFooter} alt="logo" />
@@ -17,17 +17,17 @@ const Footer = () => {
             Penatibus congue ipsum condimentum ac dignissim non mi auctor. Nulla id id non enim venenatis nibh. Nunc erat morbi auctor.
           </p>
           <div className="flex space-x-4 mt-6">
-            <a href="#" className="hover:text-lime-400">
+            <a href="#" className="hover:text-indigo-400 transition-all ">
               <Twitter />
               {/* Replace with an icon library like FontAwesome */}
             </a>
-            <a href="#" className="hover:text-lime-400">
+            <a href="#" className="hover:text-indigo-400 transition-all ">
               <Facebook />
             </a>
-            <a href="#" className="hover:text-lime-400">
+            <a href="#" className="hover:text-indigo-400 transition-all ">
               <Instagram />
             </a>
-            <a href="#" className="hover:text-lime-400">
+            <a href="#" className="hover:text-indigo-400 transition-all ">
               <Github />
             </a>
           </div>
@@ -45,7 +45,7 @@ const Footer = () => {
           <p className="mt-2 text-sm">
             +1 (333) 000-0000
             <br />
-            <a href="mailto:support@tokojobs.com" className="hover:text-lime-400">
+            <a href="mailto:support@tokojobs.com" className="hover:text-indigo-400 transition-all ">
               support@tokojobs.com
             </a>
           </p>
@@ -56,22 +56,22 @@ const Footer = () => {
           <h2 className="font-bold text-lg text-gray-100">Navigation</h2>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 Home
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 About Us
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 Services
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 Events
               </a>
             </li>
@@ -83,22 +83,22 @@ const Footer = () => {
           <h2 className="font-bold text-lg text-gray-100">Help</h2>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 Customer Support
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 How It Works
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 Terms & Condition
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-lime-400">
+              <a href="#" className="hover:text-indigo-400 transition-all ">
                 Privacy Policy
               </a>
             </li>
@@ -110,7 +110,7 @@ const Footer = () => {
       <div className="mt-10 border-t border-gray-700 pt-6 text-sm text-center text-gray-500">
         <p>© 2024 Career. All rights reserved.</p>
         <p className="mt-2">
-          Designed by <span className="text-lime-400">Istiak Jisan</span>
+          Designed by <span className="text-indigo-400">Istiak Jisan</span>
         </p>
       </div>
     </footer>
