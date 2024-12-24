@@ -1,6 +1,12 @@
 import * as motion from "motion/react-client";
 
-const categories = [
+interface Category {
+  name: string;
+  jobs: number;
+  icon: React.ReactElement;
+}
+
+const categories: Category[] = [
   {
     name: "Design",
     jobs: 235,
@@ -75,7 +81,6 @@ const categories = [
         </svg>
       </>
     ),
-    highlight: true,
   },
   {
     name: "Finance",
@@ -195,7 +200,7 @@ const Category = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          {categories.map((category, index) => (
+          {categories.map<React.ReactElement>((category: Category, index: number) => (
             <motion.div
               key={index}
               initial={{ y: 50, opacity: 0 }}

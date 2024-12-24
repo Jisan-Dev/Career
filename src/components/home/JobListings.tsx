@@ -40,7 +40,7 @@ const JobCard = ({ company, role, salary, description, tags, logo }: props) => (
 );
 
 const JobListings = () => {
-  const jobs = [
+  const jobs: props[] = [
     {
       company: "TechSolutions Inc.",
       role: "Software Engineer",
@@ -224,7 +224,7 @@ const JobListings = () => {
   return (
     <div className="px-10 mt-14">
       <div className="grid grid-cols-3 gap-6">
-        {jobs.map((job, index) => (
+        {jobs.map<React.ReactElement>((job, index) => (
           <JobCard key={index} {...job} />
         ))}
       </div>
