@@ -21,7 +21,7 @@ const StatsSection = () => {
   }
 
   return (
-    <section className="py-10 sm:py-36 px-2 sm:px-10 container mx-auto">
+    <section className="py-10 sm:py-36 px-2 lg:px-10 container mx-auto">
       <div>
         <div className="flex max-sm:flex-col sm:justify-between sm:items-center mb-16">
           <motion.h2
@@ -29,7 +29,7 @@ const StatsSection = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.9 }}
-            className="sm:w-[570px] text-3xl font-bold sm:leading-[62px]">
+            className="lg:w-[570px] text-3xl font-bold lg:leading-[62px]">
             The fast track to your next job
           </motion.h2>
           <motion.p
@@ -200,7 +200,7 @@ const StatsSection = () => {
         </div>
 
         {/* Stats Section */}
-        <div ref={ref} className="flex max-sm:flex-col sm:items-center sm:justify-center bg-[#070828] sm:px-[104px] p-10 max-sm:space-y-4 sm:py-12 rounded-xl mt-6">
+        <div ref={ref} className="flex max-sm:flex-col sm:items-center sm:justify-center bg-[#070828] lg:px-[104px] p-10 max-sm:space-y-4 sm:py-12 rounded-xl mt-6">
           <div className="flex-1 sm:border-r">
             <AnimatedNumber
               className="inline-flex items-center text-[52px] font-bold text-gray-50"

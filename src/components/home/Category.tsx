@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import * as motion from "motion/react-client";
 
 interface Category {
@@ -178,15 +179,15 @@ const categories: Category[] = [
 
 const Category = () => {
   return (
-    <section className="container mx-auto mb-10">
+    <section className="container max-sm:px-2 mx-auto mb-10">
       <div className="">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex sm:justify-between items-center mb-8">
           <motion.h2
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.8 }}
             transition={{ duration: 0.9 }}
-            className="text-[48px] font-bold">
+            className="text-3xl sm:text-[48px] font-bold">
             Explore by <span className="text-primary">category</span>
           </motion.h2>
           <motion.p
@@ -194,8 +195,8 @@ const Category = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.8 }}
             transition={{ duration: 0.9 }}
-            className="text-primary text-lg font-medium hover:underline">
-            Show all jobs &rarr;
+            className="text-primary inline-flex whitespace-pre items-center group sm:text-lg font-medium cursor-pointer">
+            Show all jobs <ArrowRight className="group-hover:translate-x-1 transition-all duration-500 " />
           </motion.p>
         </div>
 
