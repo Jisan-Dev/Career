@@ -21,15 +21,15 @@ const StatsSection = () => {
   }
 
   return (
-    <section className="py-36 container mx-auto px-10">
+    <section className="py-10 sm:py-36 px-2 sm:px-10 container mx-auto">
       <div>
-        <div className="flex justify-between items-center mb-16">
+        <div className="flex max-sm:flex-col sm:justify-between sm:items-center mb-16">
           <motion.h2
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.9 }}
-            className="w-[570px] text-[52px] font-bold leading-[62px]">
+            className="sm:w-[570px] text-3xl font-bold sm:leading-[62px]">
             The fast track to your next job
           </motion.h2>
           <motion.p
@@ -42,7 +42,7 @@ const StatsSection = () => {
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-7">
           {/* Card 1 */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
@@ -200,8 +200,8 @@ const StatsSection = () => {
         </div>
 
         {/* Stats Section */}
-        <div ref={ref} className="flex items-center justify-center bg-[#070828] px-[104px] py-12 rounded-xl mt-6">
-          <div className="flex-1 border-r">
+        <div ref={ref} className="flex max-sm:flex-col sm:items-center sm:justify-center bg-[#070828] sm:px-[104px] p-10 max-sm:space-y-4 sm:py-12 rounded-xl mt-6">
+          <div className="flex-1 sm:border-r">
             <AnimatedNumber
               className="inline-flex items-center text-[52px] font-bold text-gray-50"
               springOptions={{
@@ -213,7 +213,7 @@ const StatsSection = () => {
             />
             <p className="text-gray-50">Messages from recruiters</p>
           </div>
-          <div className="flex-1 border-r flex flex-col items-center">
+          <div className="flex-1 sm:border-r sm:flex flex-col items-center">
             <div>
               <AnimatedNumber
                 className="inline-flex items-center text-[52px] font-bold text-gray-50"
@@ -227,7 +227,7 @@ const StatsSection = () => {
               <p className="text-gray-50">Job opportunities</p>
             </div>
           </div>
-          <div className="flex-1 border-r flex flex-col items-center">
+          <div className="flex-1 sm:border-r sm:flex flex-col items-center">
             <div>
               <AnimatedNumber
                 className="inline-flex items-center text-[52px] font-bold text-gray-50"
@@ -241,7 +241,7 @@ const StatsSection = () => {
               <p className="text-gray-50">Offers made</p>
             </div>
           </div>
-          <div className="flex-1 flex flex-col items-center">
+          <div className="flex-1 sm:flex flex-col items-center">
             <div>
               <AnimatedNumber
                 className="inline-flex items-center text-[52px] font-bold text-gray-50"
