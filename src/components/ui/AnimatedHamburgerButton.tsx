@@ -23,7 +23,7 @@ export const AnimatedHamburgerButton = ({ active, setActive }: { active: boolean
         initial={false}
         animate={active ? "open" : "closed"}
         onClick={() => setActive((pv) => !pv)}
-        className="relative h-16 w-16 rounded-full bg-primary/0 transition-colors hover:bg-primary/20">
+        className="relative h-16 w-16 rounded-full bg-primary/0 transition-colors">
         <motion.span variants={VARIANTS.top} className="absolute h-1 w-8 bg-primary" style={{ y: "-50%", left: "53%", x: "-50%", top: "35%" }} />
         <motion.span variants={VARIANTS.middle} className="absolute h-1 w-8 bg-primary" style={{ left: "53%", x: "-50%", top: "50%", y: "-50%" }} />
         <motion.span

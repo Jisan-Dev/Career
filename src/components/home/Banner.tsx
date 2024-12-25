@@ -15,8 +15,8 @@ import slack from "../../../public/slack.png";
 const Banner = () => {
   return (
     <>
-      <div className=" text-center max-w-[870px] mx-auto flex flex-col items-center justify-center">
-        <TextEffect per="word" preset="blur" as="h1" className="text-7xl font-bold leading-[82px]">
+      <div className="max-sm:px-2 text-center max-w-[870px] mx-auto flex flex-col items-center justify-center">
+        <TextEffect per="word" preset="blur" as="h1" className="text-7xl max-sm:text-4xl font-bold leading-[82px]">
           Your new job, vacancies all over the world
         </TextEffect>
         <TextEffect
@@ -45,11 +45,11 @@ const Banner = () => {
               },
             },
           }}
-          className="text-[18px] mt-4 max-w-[670px] text-slate-700 leading-[30px]">
+          className="text-[18px] max-sm:text-base mt-4 max-w-[670px] text-slate-700 leading-[30px]">
           {`The best place to discover & apply to the coolest start up jobs. More than 
           672800 current vacancies from 17750 sites available to you.`}
         </TextEffect>
-        <div className="flex w-full max-w-lg items-center space-x-2 my-9">
+        <div className="flex max-sm:flex-col max-sm:px-3   w-full max-w-lg items-center space-x-2 my-9">
           <div className="w-full">
             <form className="relative mx-auto flex w-full items-center justify-between rounded-md border shadow-sm">
               <svg
@@ -74,32 +74,34 @@ const Banner = () => {
               />
             </form>
           </div>
-          <Button type="submit">Explore Now</Button>
+          <Button type="submit" className="max-sm:w-full max-sm:mt-1">
+            Explore Now
+          </Button>
         </div>
         <Image src={bannerImg} alt="banner image" />
       </div>
-      <motion.div initial={{ x: 200 }} className="absolute top-28 right-20" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: 200 }} className="max-md:hidden absolute top-28 right-20" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={arrow} alt="banner arrow image" />
       </motion.div>
-      <motion.div initial={{ x: 200 }} className="absolute top-20 right-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: 200 }} className="max-md:hidden absolute top-20 right-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={apple} alt="banner icons image" />
       </motion.div>
-      <motion.div initial={{ x: 200 }} className="absolute top-64 right-36" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: 200 }} className="max-md:hidden absolute top-64 right-36" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={webflow} alt="banner icons image" />
       </motion.div>
-      <motion.div initial={{ x: 200 }} className="absolute top-[450px] right-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: 200 }} className="max-md:hidden absolute top-[450px] right-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={google} alt="banner icons image" />
       </motion.div>
-      <motion.div initial={{ x: -200 }} className="absolute top-28 left-20 rotate-180" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: -200 }} className="max-md:hidden absolute top-28 left-20 rotate-180" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={arrow} className="rotate-180" alt="banner arrow image" />
       </motion.div>
-      <motion.div initial={{ x: -200 }} className="absolute top-64 left-36" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: -200 }} className="max-md:hidden absolute top-64 left-36" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={unknown} alt="banner icons image" />
       </motion.div>
-      <motion.div initial={{ x: -200 }} className="absolute top-20 left-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: -200 }} className="max-md:hidden absolute top-20 left-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={behance} alt="banner icons image" />
       </motion.div>
-      <motion.div initial={{ x: -200 }} className="absolute top-[450px] left-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
+      <motion.div initial={{ x: -200 }} className="max-md:hidden absolute top-[450px] left-14" animate={{ x: 0 }} transition={{ duration: 1 }}>
         <Image src={slack} alt="banner icons image" />
       </motion.div>
     </>

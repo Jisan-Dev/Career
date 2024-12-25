@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import logo from "../../public/LogoCreate.png";
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "./ui/button";
 import AnimatedBackground from "./ui/animated-background";
 import { usePathname } from "next/navigation";
 import { AnimatedHamburgerButton } from "./ui/AnimatedHamburgerButton";
+import Link from "next/link";
 
 interface Link {
   sn: number;
@@ -18,7 +18,6 @@ interface Link {
 const Navbar = () => {
   const [active, setActive] = useState<boolean>(false);
   const path = usePathname();
-  console.log(path);
 
   const links: Link[] = [
     {
@@ -46,7 +45,7 @@ const Navbar = () => {
   return (
     <nav className="container mx-auto flex items-center justify-between sm:py-8">
       <div>
-        <Image width={136} height={36} src={logo} className="max-sm:w-40" alt="Logo" />
+        <Image width={136} height={36} src={logo} className="max-sm:w-36" alt="Logo" />
       </div>
       {/* <ul className="flex gap-7">
         {links.map((link) => (
@@ -96,10 +95,8 @@ const Navbar = () => {
             <Link
               href={link.href}
               key={link.sn}
-              data-id={link.title}
-              className={` px-3 py-3 font-medium text-zinc-600 transition-colors duration-300 dark:text-zinc-400 text-xl hover:text-zinc-50 ${
-                path === link.href && "bg-primary rounded-lg text-white"
-              } `}>
+              onClick={() => setActive(false)}
+              className={` px-3 py-3 font-semibold text-zinc-600 transition-colors duration-300 text-lg ${path === link.href && "bg-primary rounded-lg text-neutral-50"} `}>
               {link.title}
             </Link>
           ))}

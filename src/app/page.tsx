@@ -18,7 +18,7 @@ import Banner from "@/components/home/Banner";
 
 export default function Home() {
   return (
-    <div className="w-full pt-12 relative overflow-x-hidden">
+    <div className="w-full pt-6 sm:pt-12 relative overflow-x-hidden">
       {/* banner */}
       <Banner />
       {/* Marquee */}
