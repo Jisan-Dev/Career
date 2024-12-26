@@ -187,7 +187,7 @@ const Category = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.8 }}
             transition={{ duration: 0.9 }}
-            className="text-3xl sm:text-[48px] font-bold">
+            className="text-4xl lg:text-5xl font-bold">
             Explore by <span className="text-primary">category</span>
           </motion.h2>
           <motion.p
@@ -200,7 +200,7 @@ const Category = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {categories.map<React.ReactElement>((category: Category, index: number) => (
             <motion.div
               key={index}

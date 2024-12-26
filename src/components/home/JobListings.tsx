@@ -222,8 +222,8 @@ const JobListings = () => {
   ];
 
   return (
-    <div className="px-10 mt-14">
-      <div className="grid grid-cols-3 gap-6">
+    <div className="md:px-10 mt-14">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
         {jobs.map<React.ReactElement>((job, index) => (
           <JobCard key={index} {...job} />
         ))}

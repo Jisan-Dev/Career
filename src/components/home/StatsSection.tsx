@@ -23,13 +23,13 @@ const StatsSection = () => {
   return (
     <section className="py-10 sm:py-36 px-2 lg:px-10 container mx-auto">
       <div>
-        <div className="flex max-sm:flex-col sm:justify-between sm:items-center mb-16">
+        <div className="flex max-sm:flex-col sm:justify-between sm:items-center mb-6 sm:mb-16">
           <motion.h2
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.9 }}
-            className="lg:w-[570px] text-3xl font-bold lg:leading-[62px]">
+            className="lg:w-[570px] text-3xl md:text-4xl lg:text-5xl font-bold lg:leading-[62px]">
             The fast track to your next job
           </motion.h2>
           <motion.p
@@ -37,7 +37,7 @@ const StatsSection = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.9 }}
-            className="w-[470px] text-[#574f4a] text-lg font-normal leading-[30px]">
+            className="lg:w-[470px] text-[#574f4a] lg:text-lg font-normal lg:leading-[30px] max-sm:mt-3">
             We ensure your next step is a step forward. That’s why we built a jobs marketplace that serves all kinds of professionals first.
           </motion.p>
         </div>
