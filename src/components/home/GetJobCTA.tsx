@@ -5,7 +5,7 @@ import Image from "next/image";
 import { TextEffect } from "../ui/text-effect";
 import { InView } from "../ui/in-view";
 
-const PostJob = () => {
+const GetJobCTA = () => {
   return (
     <div className="container max-sm:px-2 mx-auto my-32 md:flex items-center justify-between">
       <div className="max-lg:w-1/2 max-sm:w-full">
@@ -99,4 +99,4 @@ to bring new ideas to the board.`}
   );
 };
 
-export default PostJob;
+export default GetJobCTA;

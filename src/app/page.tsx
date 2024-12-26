@@ -10,7 +10,7 @@ import m7 from "../../public/m7.png";
 import m8 from "../../public/m8.png";
 import StatsSection from "@/components/home/StatsSection";
 import Category from "@/components/home/Category";
-import PostJob from "@/components/home/PostJob";
+import GetJobCTA from "@/components/home/GetJobCTA";
 import Graduating from "@/components/home/Graduating";
 import LatestFeaturedJobs from "@/components/home/LatestFeaturedJobs";
 import Newsletter from "@/components/home/Newsletter";
@@ -37,7 +37,7 @@ export default function Home() {
 
       <StatsSection />
       <Category />
-      <PostJob />
+      <GetJobCTA />
       <Graduating />
       <LatestFeaturedJobs />
       <Newsletter />
