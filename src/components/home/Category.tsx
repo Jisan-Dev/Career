@@ -179,47 +179,45 @@ const categories: Category[] = [
 
 const Category = () => {
   return (
-    <section className="container max-sm:px-2 mx-auto mb-10">
-      <div className="">
-        <div className="flex sm:justify-between items-center mb-8">
-          <motion.h2
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.8 }}
-            transition={{ duration: 0.9 }}
-            className="text-4xl lg:text-5xl font-bold">
-            Explore by <span className="text-primary">category</span>
-          </motion.h2>
-          <motion.p
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.8 }}
-            transition={{ duration: 0.9 }}
-            className="text-primary inline-flex whitespace-pre items-center group sm:text-lg font-medium cursor-pointer">
-            Show all jobs <ArrowRight className="group-hover:translate-x-1 transition-all duration-500 " />
-          </motion.p>
-        </div>
+    <section className="container max-sm:px-2 mx-auto my-10">
+      <div className="flex sm:justify-between items-center mb-8">
+        <motion.h2
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.9 }}
+          className="text-3xl lg:text-5xl font-bold">
+          Explore by <span className="text-primary">category</span>
+        </motion.h2>
+        <motion.p
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.9 }}
+          className="text-primary inline-flex whitespace-pre items-center group sm:text-lg font-medium cursor-pointer">
+          Show all jobs <ArrowRight className="group-hover:translate-x-1 transition-all duration-500 " />
+        </motion.p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {categories.map<React.ReactElement>((category: Category, index: number) => (
-            <motion.div
-              key={index}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="group">
-              <div className={`p-6 rounded border border-violet-200 transition-all duration-300 hover:bg-violet-200`}>
-                <div className="text-4xl mb-8">{category.icon}</div>
-                <h3 className="text-2xl  font-bold mb-2">{category.name}</h3>
-                <p className="text-gray-600 font-semibold text-[18px] mb-4">{category.jobs} jobs available &rarr;</p>
-                {/* <a href="#" className="text-blue-500 font-medium hover:underline">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
+        {categories.map<React.ReactElement>((category: Category, index: number) => (
+          <motion.div
+            key={index}
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+            className="group">
+            <div className={`p-3 md:p-6 rounded border border-violet-200 transition-all duration-300 hover:bg-violet-200`}>
+              <div className="text-4xl mb-4 md:mb-8">{category.icon}</div>
+              <h3 className="text-lg md:text-2xl  font-bold mb-2">{category.name}</h3>
+              <p className="text-gray-600 font-semibold text-sm md:text-[18px] mb-4">{category.jobs} jobs available &rarr;</p>
+              {/* <a href="#" className="text-blue-500 font-medium hover:underline">
                   Explore &rarr;
                 </a> */}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

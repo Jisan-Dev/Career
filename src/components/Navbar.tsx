@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <nav className="container mx-auto flex items-center justify-between sm:py-8">
       <div>
-        <Image width={136} height={36} src={logo} className="max-sm:w-36" alt="Logo" />
+        <Image width={136} height={36} src={logo} alt="Logo" />
       </div>
       {/* <ul className="flex gap-7">
         {links.map((link) => (

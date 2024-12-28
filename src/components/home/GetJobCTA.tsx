@@ -7,7 +7,7 @@ import { InView } from "../ui/in-view";
 
 const GetJobCTA = () => {
   return (
-    <div className="container max-sm:px-2 mx-auto my-32 md:flex items-center justify-between">
+    <div className="container max-sm:px-2 mx-auto md:my-32 md:flex items-center justify-between">
       <div className="max-lg:w-1/2 max-sm:w-full">
         {/* <h2 className="w-[570px] text-[52px] font-bold leading-[62px]">Find your dream jobs in best companies</h2> */}
         <TextEffect as="h2" className="lg:w-[570px] text-3xl md:text-4xl lg:text-5xl font-bold md:leading-[62px]" per="char" preset="fade">
@@ -45,10 +45,42 @@ combinations. Instead, we believe that you should
 always explore better and new tech. We challenge you
 to bring new ideas to the board.`}
         </TextEffect>
-        <p className="lg:text-lg lg:hidden font-normal text-slate-600 my-4">
+        <TextEffect
+          as="p"
+          per="line"
+          segmentWrapperClassName="overflow-hidden block"
+          variants={{
+            container: {
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.4 },
+              },
+            },
+            item: {
+              hidden: {
+                opacity: 0,
+                y: 40,
+              },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.9,
+                },
+              },
+            },
+          }}
+          className="lg:text-lg lg:hidden font-normal text-slate-600 my-4">
+          {`We don’t believe that we’ve found the holy grail
+of tech combinations. Instead, we believe that 
+you should always explore better and new tech.
+We challenge you to bring new ideas to the board.`}
+        </TextEffect>
+        {/* <p className="lg:text-lg lg:hidden font-normal text-slate-600 my-4">
           We don’t believe that we’ve found the holy grail of tech combinations. Instead, we believe that you should always explore better and new tech. We challenge you to bring
           new ideas to the board.
-        </p>
+        </p> */}
         <InView
           variants={{
             hidden: {
