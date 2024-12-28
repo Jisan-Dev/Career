@@ -212,9 +212,6 @@ const Category = () => {
               <div className="text-4xl mb-4 md:mb-8">{category.icon}</div>
               <h3 className="text-lg md:text-2xl  font-bold mb-2">{category.name}</h3>
               <p className="text-gray-600 font-semibold text-sm md:text-[18px] mb-4">{category.jobs} jobs available &rarr;</p>
-              {/* <a href="#" className="text-blue-500 font-medium hover:underline">
-                  Explore &rarr;
-                </a> */}
             </div>
           </motion.div>
         ))}
