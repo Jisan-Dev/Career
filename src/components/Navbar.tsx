@@ -56,7 +56,7 @@ const Navbar = () => {
       </ul> */}
       <div className="flex items-center justify-center gap-1">
         <AnimatedBackground
-          defaultValue={links[0].title}
+          // defaultValue={links[0].title}  //its causing some issues eg. when i am in signup page and referesh the page it set the primary bg to it automatically
           className="rounded-lg bg-primary dark:bg-zinc-800"
           transition={{
             type: "spring",
@@ -65,14 +65,15 @@ const Navbar = () => {
           }}
           enableHover>
           {links.map((link) => (
-            <button
-              key={link.sn}
+            <Link
               data-id={link.title}
+              href={link.href}
+              key={link.sn}
               className={`max-sm:hidden px-3 py-1 font-medium text-zinc-600 transition-colors duration-300 dark:text-zinc-400 hover:text-zinc-50 ${
                 path === link.href && "bg-primary rounded-lg text-zinc-50"
               } `}>
               {link.title}
-            </button>
+            </Link>
           ))}
         </AnimatedBackground>
       </div>
