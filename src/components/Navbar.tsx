@@ -83,7 +83,9 @@ const Navbar = () => {
         <Button variant={"outline"} className="mr-1 max-sm:hidden">
           Sign In
         </Button>
-        <Button className=" max-sm:hidden">Sign Up</Button>
+        <Link href={"/signup"}>
+          <Button className=" max-sm:hidden">Sign Up</Button>
+        </Link>
       </div>
       {/* <div className={`relative lg:hidden`}> */}
       <div
