@@ -1,26 +1,42 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import ToggleBtn from "./ToggleBtn";
+import { useState } from "react";
 
 export function SignupForm({ className, ...props }: React.ComponentPropsWithoutRef<"form">) {
+  const [selectedValue, setSelectedValue] = useState("off");
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
-      <div className="flex flex-col gap-2 mb-4">
+      <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold">Sign Up</h1>
         <p className="text-balance text-sm text-muted-foreground">Find jobs, events and communities that celebrate your background.</p>
       </div>
+      <div>
+        <ToggleBtn selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
+      </div>
       <div className="grid gap-6">
         <div className="flex gap-2 w-full">
-          <div className="grid gap-2">
-            <Label htmlFor="email">First Name</Label>
-            <Input id="first-name" type="text" placeholder="first name" required />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="email">Last Name</Label>
-            <Input id="last-name" type="text" placeholder="last name" required />
-          </div>
+          {selectedValue === "off" ? (
+            <>
+              <div className="grid gap-2">
+                <Label htmlFor="email">First Name</Label>
+                <Input id="first-name" type="text" placeholder="first name" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Last Name</Label>
+                <Input id="last-name" type="text" placeholder="last name" required />
+              </div>
+            </>
+          ) : (
+            <div className="grid gap-2 w-full">
+              <Label htmlFor="email">Company Name</Label>
+              <Input id="first-name" type="text" placeholder="company name" required className="w-full" />
+            </div>
+          )}
         </div>
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
@@ -33,7 +49,7 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
               Forgot your password?
             </a>
           </div>
-          <Input id="password" type="password" required />
+          <Input id="password" type="password" placeholder="**********" required />
         </div>
         <Button type="submit" className="w-full">
           Login
