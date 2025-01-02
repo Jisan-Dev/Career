@@ -2,58 +2,159 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import ToggleBtn from "./ToggleBtn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 
-export function SignupForm({ className, ...props }: React.ComponentPropsWithoutRef<"form">) {
+const SignupFormSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  firstName: z.string().min(2, "First name must be at least 2 characters").optional().or(z.literal("")),
+  lastName: z.string().min(2, "Last name must be at least 2 characters").optional().or(z.literal("")),
+  companyName: z.string().min(2, "Company name must be at least 2 characters").optional().or(z.literal("")),
+});
+
+export function SignupForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [selectedValue, setSelectedValue] = useState("off");
+
+  const form = useForm<z.infer<typeof SignupFormSchema>>({
+    resolver: zodResolver(SignupFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      companyName: "",
+    },
+  });
+
+  useEffect(() => {
+    form.resetField("firstName");
+    form.resetField("lastName");
+    form.resetField("companyName");
+  }, [selectedValue]);
+
+  const onSubmit = async (data: z.infer<typeof SignupFormSchema>) => {
+    if (data.firstName && data.lastName && selectedValue === "off") {
+      delete data.companyName;
+    } else {
+      delete data.firstName;
+      delete data.lastName;
+    }
+    console.log("FormData => ", data);
+    const res = await fetch("/api/create-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter" }),
+    });
+    const json = await res.json();
+    console.log("Response => ", json);
+  };
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold">Sign Up</h1>
-        <p className="text-balance text-sm text-muted-foreground">Find jobs, events and communities that celebrate your background.</p>
-      </div>
-      <div>
-        <ToggleBtn selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
-      </div>
-      <div className="grid gap-6">
-        <div className="flex gap-2 w-full">
-          {selectedValue === "off" ? (
-            <>
-              <div className="grid gap-2">
-                <Label htmlFor="email">First Name</Label>
-                <Input id="first-name" type="text" placeholder="first name" required />
+    <>
+      <div className={cn("flex flex-col gap-6", className)} {...props}>
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold">Sign Up</h1>
+          <p className="text-balance text-sm text-muted-foreground">Find jobs, events and communities that celebrate your background.</p>
+        </div>
+        <div>
+          <ToggleBtn selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
+        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
+            {selectedValue === "off" ? (
+              <div className="flex gap-2 w-full">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>First Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="first name" required />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Last Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="last name" required />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="email">Last Name</Label>
-                <Input id="last-name" type="text" placeholder="last name" required />
+            ) : (
+              <div className="grid gap-2 w-full">
+                <FormField
+                  control={form.control}
+                  name="companyName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Company Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="company name" required className="w-full" type="text" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-            </>
-          ) : (
-            <div className="grid gap-2 w-full">
-              <Label htmlFor="email">Company Name</Label>
-              <Input id="first-name" type="text" placeholder="company name" required className="w-full" />
+            )}
+            <div className="grid gap-2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="email" placeholder="m@example.com" required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-          )}
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
-        </div>
-        <div className="grid gap-2">
-          <div className="flex items-center">
-            <Label htmlFor="password">Password</Label>
-            <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
-              Forgot your password?
-            </a>
-          </div>
-          <Input id="password" type="password" placeholder="**********" required />
-        </div>
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
+            <div className="grid gap-2">
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center">
+                      <FormLabel htmlFor="password">Password</FormLabel>
+                      <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
+                        Forgot your password?
+                      </a>
+                    </div>
+                    <FormControl>
+                      <Input {...field} placeholder="*******" type="password" required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button type="submit" className="w-full">
+              Sign Up
+            </Button>
+          </form>
+        </Form>
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">Or continue with</span>
         </div>
@@ -66,13 +167,13 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
           </svg>
           Login with GitHub
         </Button>
+        <div className="text-center text-sm">
+          Have an account?{" "}
+          <Link href="#" className="underline underline-offset-4">
+            Sign In
+          </Link>
+        </div>
       </div>
-      <div className="text-center text-sm">
-        Have an account?{" "}
-        <Link href="#" className="underline underline-offset-4">
-          Sign In
-        </Link>
-      </div>
-    </form>
+    </>
   );
 }

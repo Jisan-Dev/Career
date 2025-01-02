@@ -5,13 +5,11 @@ export interface IUser extends Document {
   password: string;
   providerId: string;
   role: "candidate" | "recruiter" | "admin";
-  profile: {
-    name: string;
-    image: string;
-    phone?: string;
-    company?: string; // for recruiters
-    position?: string; // for recruiters
-  };
+  username: string;
+  image: string;
+  phone?: string;
+  companyName?: string; // for recruiters
+  position?: string; // for recruiters
 }
 
 // define mongoose schema for the User base on above interface
@@ -30,21 +28,24 @@ const UserSchema: Schema<IUser> = new Schema({
     },
   },
   role: { type: String, enum: ["candidate", "recruiter", "admin"], default: "candidate" },
-  profile: {
-    name: { type: String, required: true },
-    image: { type: String },
-    phone: { type: String },
-    company: {
-      type: String,
-      required: function () {
-        return this.role === "recruiter";
-      },
+  username: {
+    type: String,
+    required: function () {
+      return this.role === "candidate";
     },
-    position: {
-      type: String,
-      required: function () {
-        return this.role === "recruiter";
-      },
+  },
+  image: { type: String },
+  phone: { type: String },
+  companyName: {
+    type: String,
+    required: function () {
+      return this.role === "recruiter";
+    },
+  },
+  position: {
+    type: String,
+    required: function () {
+      return this.role === "recruiter";
     },
   },
 });
