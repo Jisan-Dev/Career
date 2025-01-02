@@ -5,7 +5,7 @@ export interface IUser extends Document {
   password: string;
   providerId: string;
   role: "candidate" | "recruiter" | "admin";
-  username: string;
+  username?: string;
   image: string;
   phone?: string;
   companyName?: string; // for recruiters
