@@ -16,6 +16,7 @@ const SignupFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters").optional().or(z.literal("")),
   lastName: z.string().min(2, "Last name must be at least 2 characters").optional().or(z.literal("")),
   companyName: z.string().min(2, "Company name must be at least 2 characters").optional().or(z.literal("")),
+  position: z.string().optional().or(z.literal("")),
 });
 
 export function SignupForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
@@ -29,6 +30,7 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
       firstName: "",
       lastName: "",
       companyName: "",
+      position: "",
     },
   });
 
@@ -46,15 +48,19 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
       delete data.lastName;
     }
     console.log("FormData => ", data);
-    const res = await fetch("/api/create-user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter" }),
-    });
-    const json = await res.json();
-    console.log("Response => ", json);
+    try {
+      const res = await fetch("/api/create-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter" }),
+      });
+      const json = await res.json();
+      console.log("Response => ", json);
+    } catch (error) {
+      console.error("Error registering user=> ", error);
+    }
   };
 
   return (
@@ -99,7 +105,7 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
                 />
               </div>
             ) : (
-              <div className="grid gap-2 w-full">
+              <div className="space-y-6">
                 <FormField
                   control={form.control}
                   name="companyName"
@@ -108,6 +114,19 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
                       <FormLabel>Company Name</FormLabel>
                       <FormControl>
                         <Input {...field} placeholder="company name" required className="w-full" type="text" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="position"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Your Position</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="your position" required className="w-full" type="text" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -150,8 +169,8 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
                 )}
               />
             </div>
-            <Button type="submit" className="w-full">
-              Sign Up
+            <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting ? "Submitting..." : "Sign Up"}
             </Button>
           </form>
         </Form>

@@ -6,7 +6,7 @@ export interface IUser extends Document {
   providerId: string;
   role: "candidate" | "recruiter" | "admin";
   username?: string;
-  image: string;
+  image?: string;
   phone?: string;
   companyName?: string; // for recruiters
   position?: string; // for recruiters
@@ -47,6 +47,7 @@ const UserSchema: Schema<IUser> = new Schema({
     required: function () {
       return this.role === "recruiter";
     },
+    default: "Hiring Manager",
   },
 });
 
