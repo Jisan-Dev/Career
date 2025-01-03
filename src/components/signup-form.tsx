@@ -64,8 +64,6 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
         });
 
       const base64Image = await toBase64(selectImg!);
-      const image = new FormData();
-      image.append("file", selectImg as string | Blob);
 
       const resImage = await fetch("/api/upload", {
         method: "POST",
