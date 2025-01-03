@@ -17,10 +17,12 @@ const SignupFormSchema = z.object({
   lastName: z.string().min(2, "Last name must be at least 2 characters").optional().or(z.literal("")),
   companyName: z.string().min(2, "Company name must be at least 2 characters").optional().or(z.literal("")),
   position: z.string().optional().or(z.literal("")),
+  image: z.string(),
 });
 
 export function SignupForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [selectedValue, setSelectedValue] = useState("off");
+  const [selectImg, setSelectImg] = useState<File>();
 
   const form = useForm<z.infer<typeof SignupFormSchema>>({
     resolver: zodResolver(SignupFormSchema),
@@ -31,6 +33,7 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
       lastName: "",
       companyName: "",
       position: "",
+      image: "",
     },
   });
 
@@ -38,28 +41,58 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
     form.resetField("firstName");
     form.resetField("lastName");
     form.resetField("companyName");
+    form.resetField("position");
   }, [selectedValue]);
 
   const onSubmit = async (data: z.infer<typeof SignupFormSchema>) => {
     if (data.firstName && data.lastName && selectedValue === "off") {
       delete data.companyName;
+      delete data.position;
     } else {
       delete data.firstName;
       delete data.lastName;
     }
-    console.log("FormData => ", data);
+    console.log("FormData => ", selectImg, data);
+
     try {
+      const toBase64 = (file: File) =>
+        new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = (error) => reject(error);
+        });
+
+      const base64Image = await toBase64(selectImg!);
+      const image = new FormData();
+      image.append("file", selectImg as string | Blob);
+
+      const resImage = await fetch("/api/upload", {
+        method: "POST",
+        body: JSON.stringify({ file: base64Image }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!resImage.ok && resImage.status === 500) {
+        throw new Error("Error uploading image");
+      }
+      const jsonImage = await resImage.json();
+      console.log("Image => ", jsonImage);
+
       const res = await fetch("/api/create-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter" }),
+        body: JSON.stringify({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter", image: jsonImage.url }),
       });
       const json = await res.json();
       console.log("Response => ", json);
     } catch (error) {
       console.error("Error registering user=> ", error);
+    } finally {
+      form.reset();
     }
   };
 
@@ -143,6 +176,34 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input {...field} type="email" placeholder="m@example.com" required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div>
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Image/Logo</FormLabel>
+                    <FormControl>
+                      {/* <FormLabel htmlFor="input-30">File input</FormLabel> */}
+                      <Input
+                        id="input-30"
+                        {...field}
+                        className="pe-3 file:me-3 file:border-0 file:border-e"
+                        type="file"
+                        required
+                        onChange={(e) => {
+                          field.onChange(e);
+                          if (e.target.value) {
+                            setSelectImg(e.target.files![0]);
+                          }
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

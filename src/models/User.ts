@@ -47,7 +47,6 @@ const UserSchema: Schema<IUser> = new Schema({
     required: function () {
       return this.role === "recruiter";
     },
-    default: "Hiring Manager",
   },
 });
 
