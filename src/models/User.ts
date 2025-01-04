@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface IUser extends Document {
   email: string;
@@ -13,7 +13,7 @@ export interface IUser extends Document {
 }
 
 // define mongoose schema for the User base on above interface
-const UserSchema: Schema<IUser> = new Schema({
+const UserSchema: Schema<IUser> = new Schema<IUser>({
   email: { type: String, required: [true, "email is required"], trim: true, lowercase: true, unique: true },
   password: {
     type: String,
