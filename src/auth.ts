@@ -1,12 +1,14 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import dbConnect from "./lib/dbConnect";
-import { User } from "./models/User";
 import { compare } from "bcryptjs";
+import { User } from "./models/User";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
+      name: "Credentials",
+
       credentials: {
         email: {},
         password: {},
@@ -22,7 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
 
           dbConnect();
-          const user = await User.findOne({ email });
+          const user = await User?.findOne({ email });
 
           if (!user) {
             throw new Error("User not found");
@@ -44,4 +46,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  pages: { signIn: "/signin" },
+  secret: process.env.AUTH_SECRET,
+  // callbacks: {
+  //   signIn: async ({ user, account }) => {
+  //     if (account?.provider === "credentials") {
+  //       return true;
+  //     }
+  //     return false;
+  //   },
+  // },
 });

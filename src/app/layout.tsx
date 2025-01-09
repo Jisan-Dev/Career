@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Career | Find one now",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className={`font-jakarta antialiased bg-accent`}>
         <Navbar />
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>

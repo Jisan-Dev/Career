@@ -81,9 +81,11 @@ const Navbar = () => {
         <div className="sm:hidden">
           <AnimatedHamburgerButton active={active} setActive={setActive} />
         </div>
-        <Button variant={"outline"} className="mr-1 max-sm:hidden">
-          Sign In
-        </Button>
+        <Link href={"/signin"}>
+          <Button variant={"outline"} className="mr-1 max-sm:hidden">
+            Sign In
+          </Button>
+        </Link>
         <Link href={"/signup"}>
           <Button className=" max-sm:hidden">Sign Up</Button>
         </Link>
