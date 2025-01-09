@@ -35,6 +35,7 @@ export function SigninForm({ className, ...props }: React.ComponentPropsWithoutR
       if (res?.err) {
         toast({ title: "Error signing in", description: res?.err?.message || "Something went wrong", variant: "destructive" });
       } else {
+        toast({ title: "Signed in successfully", description: "You have been signed in successfully" });
         router.push("/");
       }
     } catch (error) {
