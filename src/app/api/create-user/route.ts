@@ -12,9 +12,11 @@ export async function POST(request: Request) {
       delete receivedData.lastName;
     }
 
-    // Hash the password before saving it to the database
-    // const hashedPassword = await User.hashPassword(receivedData.password); // This is a static method in the User model
-    // newUser.password = hashedPassword
+    // check if user already exists
+    const user = await User.findOne({ email: receivedData.email });
+    if (user) {
+      return Response.json({ success: false, message: "User already exists" }, { status: 400 });
+    }
     const hashedPassword = await hash(receivedData.password, 10);
     receivedData.password = hashedPassword;
     const newUser = new User(receivedData);

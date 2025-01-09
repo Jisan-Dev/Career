@@ -9,6 +9,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { uploadImage } from "@/lib/uploadImage";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "./ui/toast";
+import { on } from "events";
+import { useRouter } from "next/navigation";
 
 const SignupFormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -23,6 +28,8 @@ const SignupFormSchema = z.object({
 export function SignupForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [selectedValue, setSelectedValue] = useState("off");
   const [selectImg, setSelectImg] = useState<File>();
+  const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof SignupFormSchema>>({
     resolver: zodResolver(SignupFormSchema),
@@ -55,28 +62,7 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
     console.log("FormData => ", selectImg, data);
 
     try {
-      const toBase64 = (file: File) =>
-        new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result as string);
-          reader.onerror = (error) => reject(error);
-        });
-
-      const base64Image = await toBase64(selectImg!);
-
-      const resImage = await fetch("/api/upload", {
-        method: "POST",
-        body: JSON.stringify({ file: base64Image }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (!resImage.ok && resImage.status === 500) {
-        throw new Error("Error uploading image");
-      }
-      const jsonImage = await resImage.json();
-      console.log("Image => ", jsonImage);
+      const jsonImage = await uploadImage(selectImg!);
 
       const res = await fetch("/api/create-user", {
         method: "POST",
@@ -85,12 +71,29 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
         },
         body: JSON.stringify({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter", image: jsonImage.url }),
       });
-      const json = await res.json();
-      console.log("Response => ", json);
+
+      const response = await res.json();
+      if (!response.success) {
+        toast({ title: "Error", description: response.message, variant: "destructive" });
+      } else {
+        toast({
+          title: "Success",
+          description: "User registered successfully! Please login to continue",
+        });
+        router.push("/signin");
+      }
     } catch (error) {
       console.error("Error registering user=> ", error);
-    } finally {
-      form.reset();
+      toast({
+        title: "Error",
+        description: "Something went wrong! Please try again",
+        variant: "destructive",
+        action: (
+          <ToastAction onClick={() => onSubmit(data)} altText="Retry">
+            Retry
+          </ToastAction>
+        ),
+      });
     }
   };
 
