@@ -12,10 +12,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { uploadImage } from "@/lib/uploadImage";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
-import { on } from "events";
 import { useRouter } from "next/navigation";
+import { register } from "@/actions/register";
 
-const SignupFormSchema = z.object({
+export const SignupFormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   password: z.string().min(6, "Password must be at least 6 characters"),
   firstName: z.string().min(2, "First name must be at least 2 characters").optional().or(z.literal("")),
@@ -63,16 +63,7 @@ export function SignupForm({ className, ...props }: React.ComponentPropsWithoutR
 
     try {
       const jsonImage = await uploadImage(selectImg!);
-
-      const res = await fetch("/api/create-user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter", image: jsonImage.url }),
-      });
-
-      const response = await res.json();
+      const response = await register({ ...data, role: selectedValue === "off" ? "candidate" : "recruiter", image: jsonImage.url });
       if (!response.success) {
         toast({ title: "Error", description: response.message, variant: "destructive" });
       } else {
