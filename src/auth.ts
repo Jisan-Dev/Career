@@ -13,7 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         email: {},
         password: {},
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials): Promise<any> => {
         try {
           // add logics to process credentials
           const email = credentials?.email as string | undefined;
@@ -36,7 +36,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new Error("Invalid Credentials");
           }
 
-          return user;
+          return user; // this will be stored in the token
+          // return {
+          //   ...user.toObject(),
+          //   _id: user._id.toString(),
+          // };  // this will also work then we won't need to specify return Promise<Any>
         } catch (error) {
           if (error instanceof Error) {
             throw new Error(error.message);
@@ -48,6 +52,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   pages: { signIn: "/signin" },
   secret: process.env.AUTH_SECRET,
+  callbacks: {
+    async session({ session, token }: any) {
+      if (token) {
+        session.user._id = token._id;
+        session.user.role = token.role;
+        session.user.sub = token.sub;
+      }
+      return session;
+    },
+
+    async jwt({ token, user }) {
+      if (user) {
+        token._id = user._id;
+        token.role = user.role;
+        token.sub = user.sub;
+      }
+      return token;
+    },
+  },
   // callbacks: {
   //   signIn: async ({ user, account }) => {
   //     if (account?.provider === "credentials") {
