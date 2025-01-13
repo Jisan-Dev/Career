@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../public/LogoCreate.png";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -8,6 +8,7 @@ import AnimatedBackground from "./ui/animated-background";
 import { usePathname } from "next/navigation";
 import { AnimatedHamburgerButton } from "./ui/AnimatedHamburgerButton";
 import Link from "next/link";
+import { getSession } from "@/lib/getSession";
 
 interface Link {
   sn: number;
@@ -17,7 +18,16 @@ interface Link {
 
 const Navbar = () => {
   const [active, setActive] = useState<boolean>(false);
+  const [user, setUser] = useState<any>({});
   const path = usePathname();
+
+  useEffect(() => {
+    const serverSession = async () => {
+      const session = await getSession();
+      setUser(session?.user);
+    };
+    serverSession();
+  }, []);
 
   const links: Link[] = [
     {
@@ -81,14 +91,22 @@ const Navbar = () => {
         <div className="sm:hidden">
           <AnimatedHamburgerButton active={active} setActive={setActive} />
         </div>
-        <Link href={"/signin"}>
-          <Button variant={"outline"} className="mr-1 max-sm:hidden">
-            Sign In
+        {!user && !user?.email ? (
+          <>
+            <Link href={"/signin"}>
+              <Button variant={"outline"} className="mr-1 max-sm:hidden">
+                Sign In
+              </Button>
+            </Link>
+            <Link href={"/signup"}>
+              <Button className=" max-sm:hidden">Sign Up</Button>
+            </Link>
+          </>
+        ) : (
+          <Button variant={"destructive"} className="mr-1 max-sm:hidden">
+            Sign Out
           </Button>
-        </Link>
-        <Link href={"/signup"}>
-          <Button className=" max-sm:hidden">Sign Up</Button>
-        </Link>
+        )}
       </div>
       {/* <div className={`relative lg:hidden`}> */}
       <div
