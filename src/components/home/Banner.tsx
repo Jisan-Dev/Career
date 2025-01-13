@@ -12,12 +12,22 @@ import unknown from "../../../public/unknown.png";
 import behance from "../../../public/behance.png";
 import slack from "../../../public/slack.png";
 import { useSession } from "next-auth/react";
+import { getSession } from "@/lib/getSession";
+import { useEffect } from "react";
 
 const Banner = () => {
-  // get session
+  // get session-clientSide
+  // const { data: session } = useSession();
+  // console.log(session);
 
-  const { data: session } = useSession();
-  console.log(session);
+  useEffect(() => {
+    const serverSession = async () => {
+      const session = await getSession();
+      console.log(session);
+    };
+    serverSession();
+  }, []);
+
   return (
     <>
       <div className="max-sm:px-2 text-center max-w-[870px] mx-auto flex flex-col items-center justify-center">

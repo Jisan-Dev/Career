@@ -31,17 +31,15 @@ export function SigninForm({ className, ...props }: React.ComponentPropsWithoutR
   const onSubmit = async (data: z.infer<typeof SigninFormSchema>) => {
     try {
       const res = await login(data);
-      // console.log("orree=>", res);
       if (res?.err) {
         toast({ title: "Error signing in", description: res?.err?.message || "Something went wrong", variant: "destructive" });
       } else {
         toast({ title: "Signed in successfully", description: "You have been signed in successfully" });
-        router.refresh();
-        router.push("/");
       }
     } catch (error) {
       console.error("Error signing in user=> ", error);
     } finally {
+      router.push("/");
       form.reset();
     }
   };
