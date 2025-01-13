@@ -76,13 +76,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
+    // signIn: async ({ user, account }) => {
+    //   if (account?.provider === "credentials" || account?.provider === "google") {
+    //     console.log("user=>", user);
+    //     return true;
+    //   }
+    //   return false;
+    // },
   },
-  // callbacks: {
-  //   signIn: async ({ user, account }) => {
-  //     if (account?.provider === "credentials") {
-  //       return true;
-  //     }
-  //     return false;
-  //   },
-  // },
 });
