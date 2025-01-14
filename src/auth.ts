@@ -76,12 +76,37 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
-    // signIn: async ({ user, account }) => {
-    //   if (account?.provider === "credentials" || account?.provider === "google") {
-    //     console.log("user=>", user);
-    //     return true;
-    //   }
-    //   return false;
-    // },
+    signIn: async ({ user, account }) => {
+      if (account?.provider === "google") {
+        try {
+          const { email, image, name, id } = user;
+
+          await dbConnect();
+          const alreadyUser = await User.findOne({ email });
+
+          if (alreadyUser) {
+            return true;
+          } else {
+            await User.create({
+              email,
+              providerId: id,
+              role: "notDefined",
+              username: name,
+              image,
+            });
+            return true;
+          }
+        } catch (error) {
+          console.log(error);
+          throw new Error("Error while creating user after google signin");
+        }
+      }
+
+      if (account?.provider === "credentials") {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 });
