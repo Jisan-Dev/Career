@@ -27,7 +27,7 @@ const UserSchema: Schema<IUser> = new Schema({
       return !this.password;
     },
   },
-  role: { type: String, enum: ["candidate", "recruiter", "admin"], default: "candidate" },
+  role: { type: String, enum: ["candidate", "recruiter", "admin", "notDefined"], default: "notDefined" },
   username: {
     type: String,
     required: function () {
